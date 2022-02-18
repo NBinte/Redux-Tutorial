@@ -1,7 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
 
+import { useEffect } from 'react';
+
+import Posts from './components/Posts';
+
 function App() {
+
+  useEffect(() => {
+
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then(response => response.json())
+      .then(data => console.log(data));
+
+  });
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +31,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <Posts />
     </div>
   );
 }
