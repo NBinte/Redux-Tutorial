@@ -1,71 +1,78 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React from 'react'
+import { useState, useEffect } from 'react'
 
 const Postform = () => {
+  const [inputs, setInputs] = useState({
+    title: '',
+    body: ''
+  })
 
-    const [inputs, setInputs] = useState({
-        title: "",
-        body: ""
-    });
+  console.log(inputs)
 
-    console.log(inputs);
+  const handleSubmit = e => {
+    e.preventDefault()
 
-    const handleSubmit = (e) => {
+    let post = {
+      title: inputs.title,
+      body: inputs.body
+    }
 
-        e.preventDefault();
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(post)
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+  }
 
-        let post = {
-            title: inputs.title,
-            body: inputs.body
-        };
+  return (
+    <>
+      <h1>Add a post</h1>
 
-        fetch("https://jsonplaceholder.typicode.com/posts", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(post)
-        })
-            .then(response => response.json())
-            .then(data => console.log(data));
-    };
+      <form onSubmit={handleSubmit}>
+        <label htmlFor='title'>Title:</label>
+        <br />
+        <input
+          type='text'
+          id='title'
+          name='title'
+          value={inputs.title}
+          onChange={e => {
+            setInputs(inputs => {
+              return {
+                ...inputs,
+                [e.target.name]: e.target.value
+              }
+            })
+          }}
+        ></input>
+        <br />
+        <br />
 
-    return (
-        <>
-            <h1>Add a post</h1>
+        <label>Body:</label>
+        <br />
+        <textarea
+          name='body'
+          value={inputs.body}
+          onChange={e => {
+            setInputs(inputs => {
+              return {
+                ...inputs,
+                [e.target.name]: e.target.value
+              }
+            })
+          }}
+        ></textarea>
+        <br />
+        <br />
 
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="title">Title:</label><br />
-                <input type="text"
-                    id="title"
-                    name="title"
-                    value={inputs.title}
-                    onChange={(e) => {
-                        setInputs((inputs) => {
-                            return {
-                                ...inputs, [e.target.name]: e.target.value
-                            };
-                        });
-                    }}
-                ></input><br /><br />
-
-                <label>Body:</label><br />
-                <textarea name="body"
-                    value={inputs.body}
-                    onChange={(e) => {
-                        setInputs((inputs) => {
-                            return {
-                                ...inputs, [e.target.name]: e.target.value
-                            };
-                        });
-                    }}
-                ></textarea><br /><br />
-
-                <button type="submit">Submit</button>
-
-            </form>
-        </>
-    )
+        <button type='submit'>Submit</button>
+      </form>
+    </>
+  )
 }
 
-export default Postform;
+export default Postform
