@@ -1,19 +1,13 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import Posts from './components/Posts';
+import Postform from './components/Postform';
 
-function App() {
-
-  useEffect(() => {
-
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then(response => response.json())
-      .then(data => console.log(data));
-
-  });
+const App = () => {
 
   return (
     <div className="App">
@@ -31,6 +25,8 @@ function App() {
           Learn React
         </a>
       </header>
+      <Postform />
+      <hr />
       <Posts />
     </div>
   );
