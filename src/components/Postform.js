@@ -1,21 +1,21 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React from 'react';
+import { useState, useEffect } from 'react';
 
 const Postform = () => {
   const [inputs, setInputs] = useState({
     title: '',
     body: ''
-  })
+  });
 
-  console.log(inputs)
+  console.log(inputs);
 
   const handleSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
 
     let post = {
       title: inputs.title,
       body: inputs.body
-    }
+    };
 
     fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
@@ -25,8 +25,8 @@ const Postform = () => {
       body: JSON.stringify(post)
     })
       .then(response => response.json())
-      .then(data => console.log(data))
-  }
+      .then(data => console.log(data));
+  };
 
   return (
     <>
@@ -45,8 +45,8 @@ const Postform = () => {
               return {
                 ...inputs,
                 [e.target.name]: e.target.value
-              }
-            })
+              };
+            });
           }}
         ></input>
         <br />
@@ -62,8 +62,8 @@ const Postform = () => {
               return {
                 ...inputs,
                 [e.target.name]: e.target.value
-              }
-            })
+              };
+            });
           }}
         ></textarea>
         <br />
@@ -72,7 +72,7 @@ const Postform = () => {
         <button type='submit'>Submit</button>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default Postform
+export default Postform;

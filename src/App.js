@@ -1,13 +1,15 @@
-import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
-import Posts from './components/Posts'
-import Postform from './components/Postform'
+import Posts from './components/Posts';
+import Postform from './components/Postform';
+
+import store from "./components/store";
 
 const App = () => {
   return (
@@ -32,7 +34,7 @@ const App = () => {
         <Posts />
       </div>
     </Provider>
-  )
-}
+  );
+};
 
-export default App
+export default App;
