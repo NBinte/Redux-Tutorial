@@ -1,7 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-const Postform = () => {
+import { createPost } from '../actions/postActions';
+
+const Postform = props => {
   const [inputs, setInputs] = useState({
     title: '',
     body: ''
@@ -17,15 +21,7 @@ const Postform = () => {
       body: inputs.body
     };
 
-    fetch('https://jsonplaceholder.typicode.com/posts', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(post)
-    })
-      .then(response => response.json())
-      .then(data => console.log(data));
+    props.createPost(post);
   };
 
   return (
@@ -75,4 +71,8 @@ const Postform = () => {
   );
 };
 
-export default Postform;
+Postform.propTypes = {
+  createPost: PropTypes.func.isRequired
+}
+
+export default connect(null, {createPost})(Postform);
