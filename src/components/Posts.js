@@ -29,7 +29,7 @@ const Posts = (props) => {
   );
 };
 
-Posts.PropTypes = {
+Posts.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
   posts: PropTypes.array.isRequired
 };
