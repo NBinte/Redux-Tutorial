@@ -11,8 +11,6 @@ const Postform = props => {
     body: ''
   });
 
-  console.log(inputs);
-
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -75,4 +73,4 @@ Postform.propTypes = {
   createPost: PropTypes.func.isRequired
 }
 
-export default connect(null, {createPost})(Postform);
+export default connect(null, { createPost })(Postform);

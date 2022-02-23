@@ -7,13 +7,13 @@ import { fetchPosts } from "../actions/postActions";
 
 const Posts = React.memo((props) => {
 
-  // console.log(props.fetchPosts);
+  console.log(props.posts);
+  console.log(props.newPost);
 
   useEffect(() => {
+    console.log("tea");
     props.fetchPosts();
   }, []);
-
-
 
 
   return (
