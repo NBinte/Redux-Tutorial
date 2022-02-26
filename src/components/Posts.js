@@ -5,16 +5,11 @@ import { connect } from "react-redux";
 
 import { fetchPosts } from "../actions/postActions";
 
-const Posts = React.memo((props) => {
-
-  console.log(props.posts);
-  console.log(props.newPost);
+const Posts = props => {
 
   useEffect(() => {
-    console.log("tea");
     props.fetchPosts();
   }, []);
-
 
   return (
     <>
@@ -30,19 +25,15 @@ const Posts = React.memo((props) => {
       })}
     </>
   );
-});
+};
 
 Posts.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
-  posts: PropTypes.array.isRequired,
-  newPost: PropTypes.object
+  posts: PropTypes.array.isRequired
 };
 
 const mapStatetoProps = state => ({
-
   posts: state.posts.items,
-  newPost: state.posts.item
-
 });
 
 export default connect(mapStatetoProps, { fetchPosts })(Posts);

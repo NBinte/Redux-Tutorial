@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { createPost } from '../actions/postActions';
+import { updatePosts } from '../actions/postActions';
 
 const Postform = props => {
   const [inputs, setInputs] = useState({
@@ -21,6 +22,10 @@ const Postform = props => {
 
     props.createPost(post);
   };
+
+  useEffect(() => {
+    props.updatePosts(props.posts, props.newPost);
+  }, [props.newPost]);
 
   return (
     <>
@@ -70,7 +75,17 @@ const Postform = props => {
 };
 
 Postform.propTypes = {
-  createPost: PropTypes.func.isRequired
+  createPost: PropTypes.func.isRequired,
+  updatePosts: PropTypes.func.isRequired,
+  posts: PropTypes.array.isRequired,
+  newPost: PropTypes.object
 }
 
-export default connect(null, { createPost })(Postform);
+const mapStatetoProps = state => ({
+
+  posts: state.posts.items,
+  newPost: state.posts.item
+
+});
+
+export default connect(mapStatetoProps, { createPost, updatePosts })(Postform);
